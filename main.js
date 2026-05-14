@@ -25,60 +25,57 @@ app.get("/", (req, res) => {
     res.render("index")
 })
 
-const mongoose = require('mongoose');
 
-const ratingSchema = new mongoose.Schema({
-  // 1. Name of the reviewer
-  name: {
-    type: String,
-    required: [true, 'User name is required'],
-    trim: true
-  },
+const mongoose = require("mongoose");
+const Rating = require("./rating.js");
+mongoose.connect(process.env.MONGO_CONNECTION_STRING)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.error(err));
 
-  // 2. Numerical Rating (1-5 star scale)
-  rating: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 5
-  },
 
-  // 3. User Comment
-  comment: {
-    type: String,
-    maxLength: [500, 'Comment cannot exceed 500 characters']
-  },
-
-  // 4. Geospatial Location (GeoJSON Point)
-  // Required for spatial queries like .find({ location: { $near: ... } })
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      default: 'Point'
-    },
-    coordinates: {
-      type: [Number], // [longitude, latitude]
-      required: true
+app.post("/submit", async (req, res) => {
+    const location = req.body.dropdown;
+    const rating = req.body.rating;
+    const comment = req.body.comment;
+    
+    try {
+        const newRating = new Rating({
+            name: "John",
+            rating: rating,
+            comment: comment,
+            location: {
+                type: 'Point',
+                coordinates: [38.9880, 76.9385] // hopefully mckeldin library coords
+            },
+            weather: 68
+        });
+        await newRating.save();
+        res.redirect("/"); // or render a success page
+    } catch (e) {
+        response.status(500).send("Error saving to database");
     }
-  },
-
-  // 5. Weather Snapshot (Object)
-  // Useful for tracking context (e.g., "Was it raining when they rated?")
-  weather: {
-    temp: Number,
-    condition: String, // e.g., 'Sunny', 'Rainy'
-    humidity: Number
-  },
-
-  // 6. Metadata
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
 });
 
-// Create a 2dsphere index for the location to enable proximity searches
-ratingSchema.index({ location: '2dsphere' });
 
-const Rating = mongoose.model('Rating', ratingSchema);
+// (async () => {
+//    try {
+//       await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
+//     //   const rating1 = new Rating({
+//     //     name: "Grace",
+//     //     rating: 5,
+//     //     comment: "Wow I love McKeldin and the cool nice amazing weather we have here",
+//     //     location: {
+//     //       type: 'Point',
+//     //       coordinates: [38.985946, 76.9450396] // hopefully mckeldin library coords
+//     //     },
+//     //     weather: 68
+//     //   });
+//     //   await rating1.save();
+      
+//       const testing = await Rating.find({});
+//       console.log("Ratings\n", testing);
+//       mongoose.disconnect();
+//    } catch (err) {
+//       console.error(err);
+//    }
+// })();
