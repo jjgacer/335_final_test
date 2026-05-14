@@ -5,6 +5,34 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        <h1>Hello world</h1>
+        <h1>UMD Study Spots Rater</h1>
+            <form action = "/processForm" method = "POST">
+                <fieldset>
+                    <label>Comments:</label>
+                    <textarea name="comment" rows="4" cols="50"></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>Rating:</label>
+                    <select name="rating" id="rating">
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <label>Location:</label>
+                    <select name = "dropdown" id ="dropdown">
+                        <option value = "McKeldin Libary">McKeldin Library</option>
+                        <option value = "Stamp Student Union">Stamp Student Union</option>
+                        <option value = "Hornbake Library">Hornbake Library</option>
+                        <option value = "ESJ">ESJ</option>
+                        <option value = "Iribe">Iribe </option>
+                    </select>
+                </fieldset>
+                <input type = "submit" value = "Submit"/>
+                
+            </form>
     </body>
 </html>
