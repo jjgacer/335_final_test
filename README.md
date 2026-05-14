@@ -2,13 +2,13 @@
 
 **Submitted by:** name (uid)
 
-**Group Members:** Anh Pham (uid), Kashish Patel (uid), Grace Chen (gpc7163)
+**Group Members:** Anh Pham (119741573), Kashish Patel (uid), Grace Chen (gpc7163)
 
 **App Description:** Live updates for most commonly used UMD study spots.
 
 **YouTube Video Link:** link
 
-**APIs:** name (link)
+**APIs:** National Weather Service API (https://rapidapi.com/theapiguy/api/national-weather-service)
 
 **Contact Email:**  email
 
