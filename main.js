@@ -82,3 +82,49 @@ const ratingSchema = new mongoose.Schema({
 ratingSchema.index({ location: '2dsphere' });
 
 const Rating = mongoose.model('Rating', ratingSchema);
+
+async function getWeather() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+            'x-rapidapi-host': 'national-weather-service.p.rapidapi.com',
+            'User-Agent': 'CollegeParkWeatherApp/1.0' // Good practice for NWS API
+        }
+    };
+
+    try {
+        // STEP 1: Get metadata for coordinates
+        const step1Response = await fetch('https://national-weather-service.p.rapidapi.com/points/38.9807,-76.9379', options);
+        
+        if (!step1Response.ok) {
+            throw new Error(`Step 1 failed: ${step1Response.statusText}`);
+        }
+
+        const zoneData = await step1Response.json();
+        const forecastUrl = zoneData.properties.forecast;
+        
+        // STEP 2: Fetch the forecast
+        // We use the same options here to keep the User-Agent consistent
+        const step2Response = await fetch(forecastUrl, { headers: { 'User-Agent': 'CollegeParkWeatherApp/1.0' } });
+        
+        if (!step2Response.ok) {
+            throw new Error(`Step 2 failed: ${step2Response.statusText}`);
+        }
+
+        const weatherData = await step2Response.json();
+        
+        // STEP 3: Access and display data
+        const currentPeriod = weatherData.properties.periods[0];
+        const currentTemp = currentPeriod.temperature;
+        const unit = currentPeriod.temperatureUnit; // Dynamically get F or C
+        
+        console.log(`The forecast for ${currentPeriod.name} is ${currentTemp}°${unit}.`);
+        console.log(`Conditions: ${currentPeriod.shortForecast}`);
+        
+    } catch (error) {
+        console.error("Weather Fetch Error:", error.message);
+    }
+}
+
+getWeather();
