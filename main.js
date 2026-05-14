@@ -19,6 +19,8 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "templates"));
 app.use(bodyParser.urlencoded({extended:false}));
+app.use('/public', express.static(path.resolve(__dirname, 'public')));
+app.use('/leaflet', express.static(__dirname + '/node_modules/leaflet/dist'));
 app.listen(portNumber);
 
 app.get("/", (req, res) => {
