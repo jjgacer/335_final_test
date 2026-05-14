@@ -34,13 +34,14 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING)
 
 
 app.post("/submit", async (req, res) => {
-    const location = req.body.dropdown;
+    const name = req.body.name;
     const rating = req.body.rating;
+    const location = req.body.dropdown;
     const comment = req.body.comment;
     
     try {
         const newRating = new Rating({
-            name: "John",
+            name: name,
             rating: rating,
             comment: comment,
             location: {
