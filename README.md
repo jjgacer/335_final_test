@@ -2,7 +2,7 @@
 
 **Submitted by:** name (uid)
 
-**Group Members:** Anh Pham (119741573), Kashish Patel (uid), Grace Chen (gpc7163)
+**Group Members:** Anh Pham (119741573), Kashish Patel (kpatel06), Grace Chen (gpc7163)
 
 **App Description:** Live updates for most commonly used UMD study spots.
 
