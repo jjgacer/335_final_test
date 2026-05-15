@@ -1,8 +1,8 @@
 # Study Spots Rater
 
-**Submitted by:** name (uid)
+**Submitted by:** Grace Chen (gpc7163)
 
-**Group Members:** Anh Pham (uid), Kashish Patel (kpatel06), Grace Chen (gpc7163)
+**Group Members:** Anh Pham (ppham05), Kashish Patel (kpatel06), Grace Chen (gpc7163)
 
 **App Description:** Live updates (i.e., current weather with user reviews) for most commonly used UMD study spots.
 
@@ -10,7 +10,7 @@
 
 **APIs:** National Weather Service API (https://rapidapi.com/theapiguy/api/national-weather-service)
 
-**Contact Email:**  name@terpmail.umd.edu
+**Contact Email:**  gpc7163@terpmail.umd.edu
 
 **Deployed App Link:** https://umd-study-spots-rater.onrender.com
 
