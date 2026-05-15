@@ -8,7 +8,7 @@ require("dotenv").config({
 
 
 const buildings = require("./data/buildings.json");
-const { updateBuildingRatings } = require("./helpers");
+const { updateBuildingRatings, getWeather } = require("./helpers");
 
 process.stdin.setEncoding("utf8");
 
@@ -41,35 +41,3 @@ app.listen(portNumber);
 app.get("/", (req, res) => {
     res.render("index", { buildings });
 });
-
-// ...existing code...
-
-
-async function getWeather() {
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-key': process.env.RAPIDAPI_KEY,
-            'x-rapidapi-host': 'national-weather-service.p.rapidapi.com'
-        }
-    };
-
-    try {
-        // somewhere in college park...
-        const res = await fetch('https://national-weather-service.p.rapidapi.com/points/38.9807,-76.9379', options);
-        if (!res.ok)
-            throw new Error('NWS API fetch failed');
-
-        const { properties } = await res.json();
-        const forecastRes = await fetch(properties.forecast, options);
-        if (!forecastRes.ok)
-            throw new Error('Forecast fetch failed');
-
-        const weather = await forecastRes.json();
-
-        return weather.properties.periods[0].temperature;
-    } catch (e) {
-        console.error(e);
-        return 0;
-    }
-}
