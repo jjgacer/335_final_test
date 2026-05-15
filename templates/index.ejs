@@ -10,49 +10,20 @@
     <body>
         <div class="app">
             <div class="sidebar">
-                <div class="sidebar-header">
-                    <div style="display: flex; flex-direction: column;">
-                        <span>Hello Terp!</span>
-                        <textarea rows="1" class="username-input">Darryll Pines</textarea>
-                    </div>
-                    <div class="sidebar-weather">
-                        <span id="weather-icon">☀️</span>
-                        <div style="display: flex;">
-                            <span id="weather-temp">71</span>
-                            <span id="weather-unit">°F</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <div class="section-header">
-                        <span class="text-section-header">Trending study spots</span>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <div class="section-header">
-                        <span class="text-section-header">Perfect for current weather</span>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <div class="section-header">
-                        <span class="text-section-header">All study spots</span>
-                    </div>
-                    <div id="all-study-spots"></div>
-                </div>
+                <%- include('components/sidebar-content', { buildings }) %>
             </div>
             <div class="map-container">
                 <div id="map"></div>
                 <div class="comment-dialog">
-                    <form class="comment-form">
-                        <textarea rows="1" placeholder="What's on your mind?"></textarea>
+                    <form class="comment-form" id="comment-form">
+                        <textarea rows="1" name="comment" placeholder="What's on your mind?"></textarea>
                         <div class="comment-form-options">
                             <div>
                                 <div id="comment-form-star-rating" class="comment-form-star-rating"></div>
-                                <select>
-                                    <option>McKeldin Library</option>
+                                <select name="location">
+                                    <% buildings.forEach(building => { %>
+                                        <option value="<%= building.name %>"><%= building.displayName %></option>
+                                    <% }) %>
                                 </select>
                             </div>
                             <input type="submit" class="umd-button">
@@ -63,7 +34,7 @@
         </div>
 
         <script src="/leaflet/leaflet.js"></script>
-        <script src="/buildings.js"></script>
+        <script>const buildings = <%- JSON.stringify(buildings) %>;</script>
         <script src="/client.js" defer></script>
     </body>
 </html>
