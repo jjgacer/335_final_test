@@ -1,0 +1,10 @@
+<div class="study-spot-item" data-location="<%= building.name %>">
+    <img src="<%= building.image %>" alt="<%= building.displayName %>" width="64" height="64">
+    <div class="study-spot-content">
+        <div class="study-spot-name"><%= building.displayName %></div>
+        <div class="study-spot-rating-row">
+            <%- include('star-rating', { rating: building.rating, size: 16 }) %>
+            <span class="study-spot-rating">(<%= Number(building.rating).toPrecision(2) %>)</span>
+        </div>
+    </div>
+</div>

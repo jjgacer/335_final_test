@@ -1,0 +1,45 @@
+<div class="sidebar-header">
+    <div style="display: flex; flex-direction: column;">
+        <span>Hello Terp!</span>
+        <textarea rows="1" class="username-input">Anonymous Terp</textarea>
+    </div>
+    <div class="sidebar-weather">
+        <span id="weather-icon">&#9728;&#65039;</span>
+        <div style="display: flex;">
+            <span id="weather-temp">71</span>
+            <span id="weather-unit">&deg;F</span>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar-section">
+    <div class="section-header">
+        <span class="text-section-header">Trending study spots</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+        <% buildings.slice().sort((a, b) => b.rating - a.rating).slice(0, 3).forEach(building => { %>
+            <%- include('study-spot', { building }) %>
+        <% }) %>
+    </div>
+</div>
+
+<div class="sidebar-section">
+    <div class="section-header">
+        <span class="text-section-header">Perfect for current weather</span>
+    </div>
+    <% const mckeldin = buildings.find(b => b.name === 'mckeldin'); %>
+    <% if (mckeldin) { %>
+        <%- include('study-spot', { building: mckeldin }) %>
+    <% } %>
+</div>
+
+<div class="sidebar-section">
+    <div class="section-header">
+        <span class="text-section-header">All study spots</span>
+    </div>
+    <div id="all-study-spots">
+        <% buildings.forEach(building => { %>
+            <%- include('study-spot', { building }) %>
+        <% }) %>
+    </div>
+</div>

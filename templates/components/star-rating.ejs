@@ -1,0 +1,8 @@
+<div class="star-rating is-readonly" style="--star-size: <%= size %>px">
+    <input type="hidden" name="rating" value="<%= rating > 0 ? rating : '' %>">
+    <% for (let i = 1; i <= 5; i++) { %>
+        <% const starClass = rating >= i ? 'is-full' : (rating >= i - 0.5 ? 'is-half' : 'is-empty'); %>
+        <% const pressed = rating >= i - 0.5 ? 'true' : 'false'; %>
+        <span class="rating-star <%= starClass %>" aria-label="<%= i %> star" aria-pressed="<%= pressed %>">&#9733;</span>
+    <% } %>
+</div>
