@@ -1,10 +1,10 @@
-# 335_final_test
+# Study Spots Rater
 
 **Submitted by:** name (uid)
 
 **Group Members:** Anh Pham (uid), Kashish Patel (kpatel06), Grace Chen (gpc7163)
 
-**App Description:** Live updates for most commonly used UMD study spots.
+**App Description:** Live updates (i.e., current weather with user reviews) for most commonly used UMD study spots.
 
 **YouTube Video Link:** https://youtu.be/-HwQQOMUt7Y
 
