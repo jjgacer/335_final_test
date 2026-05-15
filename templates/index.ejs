@@ -3,8 +3,38 @@
     <head>
         <title>Study Spots Rater</title>
         <meta charset="utf-8"/>
+
+        <link rel="stylesheet" href="/leaflet/leaflet.css" />
+        <link rel="stylesheet" href="/styles.css"/>
     </head>
     <body>
-        <h1>Hello world</h1>
+        <div class="app">
+            <div class="sidebar">
+                <%- include('components/sidebar-content', { buildings }) %>
+            </div>
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="comment-dialog">
+                    <form class="comment-form" id="comment-form">
+                        <textarea rows="1" name="comment" placeholder="What's on your mind?"></textarea>
+                        <div class="comment-form-options">
+                            <div>
+                                <div id="comment-form-star-rating" class="comment-form-star-rating"></div>
+                                <select name="location">
+                                    <% buildings.forEach(building => { %>
+                                        <option value="<%= building.name %>"><%= building.displayName %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <input type="submit" class="umd-button">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="/leaflet/leaflet.js"></script>
+        <script>const buildings = <%- JSON.stringify(buildings) %>;</script>
+        <script src="/client.js" defer></script>
     </body>
 </html>

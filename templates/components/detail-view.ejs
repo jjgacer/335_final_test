@@ -1,0 +1,40 @@
+<div class="detail-view">
+    <div class="detail-hero" style="background-image: url('<%= building.image %>')">
+        <button class="detail-back-btn"><img src="/icons/Left-Chevron.svg" class="detail-back-icon"> <span>Back</span></button>
+        <div>
+            <h2 class="detail-title"><%= building.displayName %></h2>
+            <div class="detail-rating-row">
+                <%- include('star-rating', { rating: building.rating, size: 20 }) %>
+                <span class="detail-hero-rating">(<%= Number(building.rating).toPrecision(2) %>)</span>
+            </div>
+        </div>
+    </div>
+    <div class="detail-body">
+    <h3>Comments (<%= comments.length %>)</h3>
+    <div class="detail-comments">
+        <% if (comments.length === 0) { %>
+            <p class="detail-no-comments">No comments yet.</p>
+        <% } else { %>
+            <% comments.forEach(c => { %>
+                <div class="detail-comment">
+                    <div class="detail-comment-header">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <strong><%= c.name %></strong>
+                            <% if (c.weather) { %>
+                                <span class="detail-comment-temp"><%= c.weather %>&deg;F</span>
+                            <% } %>
+                        </div>
+                        <span class="detail-comment-date"><%= new Date(c.createdAt).toLocaleDateString() %></span>
+                    </div>
+                    <div class="detail-comment-rating">
+                        <%- include('star-rating', { rating: c.rating, size: 14 }) %>
+                    </div>
+                    <% if (c.comment) { %>
+                        <p class="detail-comment-text"><%= c.comment %></p>
+                    <% } %>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    </div>
+</div>
